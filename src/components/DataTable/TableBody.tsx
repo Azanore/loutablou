@@ -11,6 +11,7 @@ interface TableBodyProps {
   rows: ResolvedRow[]
   columns: NormalizedColumnDef[]
   density: Density
+  rowOffset?: number
   emptyVariant?: 'empty' | 'filtered' | 'error'
   onClearFilters?: () => void
   pinnedColumns?: string[]
@@ -20,7 +21,7 @@ interface TableBodyProps {
 }
 
 /** Renders the table body — delegates to TableRow per row or EmptyState when rows is empty. */
-export function TableBody({ rows, columns, density, emptyVariant = 'empty', onClearFilters, pinnedColumns = [], pinnedOffsets = {}, selectedRowIds = new Set(), onToggleRow = () => {} }: TableBodyProps) {
+export function TableBody({ rows, columns, density, rowOffset = 0, emptyVariant = 'empty', onClearFilters, pinnedColumns = [], pinnedOffsets = {}, selectedRowIds = new Set(), onToggleRow = () => {} }: TableBodyProps) {
   if (rows.length === 0) {
     return (
       <tbody>
@@ -36,7 +37,7 @@ export function TableBody({ rows, columns, density, emptyVariant = 'empty', onCl
           key={row._tableRowId}
           row={row}
           columns={columns}
-          rowIndex={index}
+          rowIndex={rowOffset + index}
           density={density}
           pinnedColumns={pinnedColumns}
           pinnedOffsets={pinnedOffsets}

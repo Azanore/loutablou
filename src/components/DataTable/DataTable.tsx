@@ -201,6 +201,7 @@ export function DataTable(props: DataTableProps): React.ReactElement {
           <TableBody
             rows={pagedRows}
             columns={visibleNormalizedCols}
+            rowOffset={safePage * pageSize}
             density={density}
             emptyVariant={anyFilterActive ? 'filtered' : 'empty'}
             onClearFilters={handleClearAllFilters}
