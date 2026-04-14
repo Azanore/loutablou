@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&display=swap');
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* ─── Design tokens (light) ─────────────────────────────────────────── */
+:root {
+  --canvas: oklch(0.97 0.002 250);
+  --surface: oklch(1 0 0);
+  /* header/filter row bg — clearly distinct from data rows */
+  --surface-raised: oklch(0.88 0.008 250);
+  --surface-hover: oklch(0.84 0.010 250);
+  /* label row (column names) — deep blue-grey for strong visual hierarchy */
+  --surface-header: oklch(0.30 0.030 250);
+  /* pinned column bg — noticeably tinted vs plain white rows */
+  --surface-pinned: oklch(0.96 0.006 250);
+
+  /* borders — visible but not heavy */
+  --border-subtle: oklch(0 0 0 / 0.11);
+  --border: oklch(0 0 0 / 0.16);
+  --border-strong: oklch(0 0 0 / 0.24);
+
+  /* text — primary is near-black, muted is darker than before for legibility */
+  --text-primary: oklch(0.15 0.005 250);
+  --text-secondary: oklch(0.38 0.008 250);
+  --text-muted: oklch(0.46 0.007 250);
+  /* header-specific text — light enough for contrast on dark surface-header */
+  --text-header: oklch(0.97 0.006 250);
+  --text-header-muted: oklch(0.78 0.015 250);
+
+  --accent: oklch(0.50 0.18 250);
+  --accent-hover: oklch(0.45 0.18 250);
+  --accent-subtle: oklch(0.50 0.18 250 / 0.08);
+  --accent-border: oklch(0.50 0.18 250 / 0.30);
+
+  /* row-selected-pinned: opaque equivalent of row-selected for sticky cells */
+  --row-selected-pinned: oklch(0.88 0.04 250);
+  --row-selected: oklch(0.50 0.18 250 / 0.12);
+  --row-hover: oklch(0 0 0 / 0.045);
+  --row-stripe: oklch(0 0 0 / 0.04);
+  /* pinned stripe is the pinned bg darkened slightly */
+  --row-stripe-pinned: oklch(0.93 0.006 250);
+
+  /* Scrollbar */
+  --scrollbar-track: oklch(0.93 0.003 250);
+  --scrollbar-thumb: oklch(0.75 0.006 250);
+  --scrollbar-thumb-hover: oklch(0.62 0.008 250);
+
+  /* Form elements */
+  --input-bg: oklch(1 0 0);
+  --select-option-bg: oklch(0.97 0.002 250);
+}
+
+/* ─── Tailwind token bridge ─────────────────────────────────────────── */
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-surface-hover: var(--surface-hover);
+  --color-surface-header: var(--surface-header);
+  --color-surface-pinned: var(--surface-pinned);
+
+  --color-border-subtle: var(--border-subtle);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-text-header: var(--text-header);
+  --color-text-header-muted: var(--text-header-muted);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-subtle: var(--accent-subtle);
+  --color-accent-border: var(--accent-border);
+
+  --color-row-selected: var(--row-selected);
+  --color-row-selected-pinned: var(--row-selected-pinned);
+  --color-row-hover: var(--row-hover);
+  --color-row-stripe: var(--row-stripe);
+  --color-row-stripe-pinned: var(--row-stripe-pinned);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+}
+
+/* ─── Base ──────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+  background-color: var(--canvas);
+  color: var(--text-primary);
+  font-family: 'Geist', 'Inter', system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+}
+
+/* ─── Scrollbars ────────────────────────────────────────────────────── */
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* Chromium */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+  border: 2px solid var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
+}
+
+/* ─── Form elements ─────────────────────────────────────────────────── */
+input[type="date"],
+input[type="datetime-local"],
+input[type="time"] {
+  background-color: var(--input-bg);
+  color: var(--text-primary);
+  color-scheme: inherit;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+select option {
+  background-color: var(--select-option-bg);
+  color: var(--text-primary);
+}
